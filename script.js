@@ -13,12 +13,22 @@ function calculateDelivery() {
     const totalValue = deliveryValue + meal;
 
     const deliveryEl = document.getElementById("deliveryValue");
+    const button = document.querySelector("button");
 
+    // Bloqueia o botão durante animação
+    button.disabled = true;
+
+    // Define cor dinâmica
+    if (deliveryValue < 5) {
+        deliveryEl.style.color = "#28a745"; // verde
+    } else if (deliveryValue < 15) {
+        deliveryEl.style.color = "#ffc107"; // amarelo
+    } else {
+        deliveryEl.style.color = "#dc3545"; // vermelho
+    }
+
+    // HTML do resultado com detalhes
     deliveryEl.innerHTML = `
-        <span style="color:#0077cc;">Valor da entrega: <strong>€${deliveryValue.toFixed(2)}</strong></span><br>
-        Valor do lanche: <strong>€${meal.toFixed(2)}</strong><br><br>
-        <span style="font-size:1.2em; color:#28a745;">TOTAL A PAGAR: <strong>€${totalValue.toFixed(2)}</strong></span>
-
         <details style="margin-top:15px;">
           <summary style="cursor:pointer; color:#555; font-weight:bold;">Ver detalhes do cálculo</summary>
           <div style="margin-top:10px; font-size:0.9em; color:#333;">
@@ -26,12 +36,34 @@ function calculateDelivery() {
             Multiplicador aplicado: x${multiplier} → €${afterMultiplier.toFixed(2)}<br>
             Bônus de chuva: x${rain} → €${afterRain.toFixed(2)}<br>
             Tipo de veículo: x${vehicle} → €${deliveryValue.toFixed(2)}<br>
+            Valor do lanche: €${meal.toFixed(2)}<br>
+            TOTAL: €${totalValue.toFixed(2)}
           </div>
         </details>
     `;
 
-    // animação suave
+    // Animação suave
     deliveryEl.classList.remove("show");
     void deliveryEl.offsetWidth; // trigger reflow
     deliveryEl.classList.add("show");
+
+    // Contagem animada do valor da entrega
+    animateValue(deliveryEl, 0, deliveryValue, 800);
+
+    // Reabilita o botão após animação
+    setTimeout(() => { button.disabled = false; }, 800);
+
+    function animateValue(element, start, end, duration) {
+        let range = end - start;
+        let current = start;
+        let increment = range / (duration / 20);
+        const timer = setInterval(() => {
+            current += increment;
+            if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                current = end;
+                clearInterval(timer);
+            }
+            element.innerHTML = `€${current.toFixed(2)}`;
+        }, 20);
+    }
 }

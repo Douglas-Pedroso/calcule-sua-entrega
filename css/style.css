@@ -98,6 +98,11 @@ button:hover {
     transform: translateY(0);
 }
 
+#deliveryValue:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
 /* Bloco de detalhes */
 details {
     background: #f1f3f5;
