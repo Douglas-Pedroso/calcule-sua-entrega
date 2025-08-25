@@ -5,7 +5,7 @@ function calculateDelivery() {
     const vehicle = parseFloat(document.getElementById("vehicle").value) || 1;
     const meal = parseFloat(document.getElementById("meal").value) || 0;
 
-    const basePricePerKm = 0.90;
+    const basePricePerKm = 0.90; // atualizado
     const baseDelivery = distance * basePricePerKm;
     const afterMultiplier = baseDelivery * multiplier;
     const afterRain = afterMultiplier * rain;
