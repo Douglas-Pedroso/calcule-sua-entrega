@@ -1,5 +1,16 @@
-<link rel="stylesheet" href="css/style.css">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcule Sua Entrega</title>
 
+    <!-- CSS global (tema escuro) -->
+    <link rel="stylesheet" href="css/global.css">
+    <!-- CSS específico do projeto -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
     <div class="container">
         <h1>Calcule sua Entrega em Portugal</h1>
@@ -32,10 +43,8 @@
 
         <div id="result">
             <h2>Valor da entrega:</h2>
-            <!-- Span separado apenas para o valor animado -->
             <p>Valor da entrega: <span id="animatedDelivery">€0.00</span></p>
             
-            <!-- Detalhes minimizados -->
             <details>
                 <summary>Ver detalhes do cálculo</summary>
                 <div id="deliveryDetails"></div>
@@ -43,4 +52,7 @@
         </div>
     </div>
 
+    <!-- Script do projeto -->
     <script src="script.js"></script>
+</body>
+</html>

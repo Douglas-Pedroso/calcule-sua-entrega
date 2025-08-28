@@ -7,6 +7,8 @@ function calculateDelivery() {
 
     const basePricePerKm = 0.90;
     const baseDelivery = distance * basePricePerKm;
+
+    // Aplica multiplicadores
     const afterMultiplier = baseDelivery * multiplier;
     const afterRain = afterMultiplier * rain;
     const deliveryValue = afterRain * vehicle;
@@ -18,37 +20,42 @@ function calculateDelivery() {
 
     button.disabled = true;
 
-    // Definir detalhes
+    // Detalhes do cálculo
     detailsEl.innerHTML = `
         Valor base (distância x €${basePricePerKm.toFixed(2)}/km): €${baseDelivery.toFixed(2)}<br>
         Multiplicador aplicado: x${multiplier} → €${afterMultiplier.toFixed(2)}<br>
         Bônus de chuva: x${rain} → €${afterRain.toFixed(2)}<br>
         Tipo de veículo: x${vehicle} → €${deliveryValue.toFixed(2)}<br>
         Valor do lanche: €${meal.toFixed(2)}<br>
-        TOTAL: €${totalValue.toFixed(2)}
+        <strong>TOTAL: €${totalValue.toFixed(2)}</strong>
     `;
 
     // Cor dinâmica do valor
-    if (deliveryValue < 5) animatedEl.style.color = "#28a745";
-    else if (deliveryValue < 15) animatedEl.style.color = "#ffc107";
-    else animatedEl.style.color = "#dc3545";
+    if (deliveryValue < 5) {
+        animatedEl.style.color = "#28a745"; // verde
+    } else if (deliveryValue < 15) {
+        animatedEl.style.color = "#ffc107"; // amarelo
+    } else {
+        animatedEl.style.color = "#dc3545"; // vermelho
+    }
 
-    // Animação do valor
+    // Animação do valor da entrega
     animateValue(animatedEl, 0, deliveryValue, 800);
 
     setTimeout(() => { button.disabled = false; }, 800);
+}
 
-    function animateValue(element, start, end, duration) {
-        let range = end - start;
-        let current = start;
-        let increment = range / (duration / 20);
-        const timer = setInterval(() => {
-            current += increment;
-            if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
-                current = end;
-                clearInterval(timer);
-            }
-            element.innerText = `€${current.toFixed(2)}`;
-        }, 20);
-    }
+// Função de animação
+function animateValue(element, start, end, duration) {
+    let range = end - start;
+    let current = start;
+    let increment = range / (duration / 20);
+    const timer = setInterval(() => {
+        current += increment;
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            current = end;
+            clearInterval(timer);
+        }
+        element.innerText = `€${current.toFixed(2)}`;
+    }, 20);
 }
