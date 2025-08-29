@@ -1,58 +1,62 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcule Sua Entrega</title>
-
-    <!-- CSS global (tema escuro) -->
-    <link rel="stylesheet" href="css/global.css">
-    <!-- CSS específico do projeto -->
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Entrega</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+<div class="container">
+    <h1>Calculadora de Entrega</h1>
+    <form id="deliveryForm">
+        <!-- Seção Cálculo da Entrega -->
+        <label for="distance">Distância (km):</label>
+        <input type="number" id="distance" value="5" step="0.1" min="0">
 
-    <div class="container">
-        <h1>Calcule sua Entrega em Portugal</h1>
+        <label for="basePrice">Preço base por km (€):</label>
+        <input type="number" id="basePrice" value="0.90" step="0.01" min="0">
 
-        <form id="calculator">
-            <label for="meal">Valor do lanche (€):</label>
-            <input type="number" id="meal" min="0" step="0.01" value="0">
+        <label for="multiplier">Multiplicador:</label>
+        <input type="number" id="multiplier" value="1" step="0.1" min="0">
 
-            <label for="distance">Distância (km):</label>
-            <input type="number" id="distance" min="0" step="0.1" required>
+        <label for="rain">Bônus de chuva:</label>
+        <select id="rain">
+           <option value="1">Não</option>
+           <option value="1.2">Sim</option>
+        </select>
 
-            <label for="multiplier">Multiplicador:</label>
-            <input type="number" id="multiplier" min="1" step="0.1" value="1">
 
-            <label for="rain">Está chovendo?</label>
-            <select id="rain">
-                <option value="0">Não</option>
-                <option value="1.2">Sim (20% a mais)</option>
-            </select>
+        <label for="vehicle">Tipo de veículo:</label>
+        <select id="vehicle">
+            <option value="1">Bicicleta (x1)</option>
+            <option value="1.5">Moto (x1.5)</option>
+            <option value="2">Carro (x2)</option>
+        </select>
 
-            <label for="vehicle">Veículo:</label>
-            <select id="vehicle">
-                <option value="1">Bicicleta</option>
-                <option value="1.1">Moto (10% a mais)</option>
-                <option value="1.2">Carro (20% a mais)</option>
-            </select>
 
-            <button type="button" onclick="calculateDelivery()">Calcular Entrega</button>
-        </form>
+        <label for="meal">Valor do lanche (€):</label>
+        <input type="number" id="meal" value="0" step="0.01" min="0">
 
-        <div id="result">
-            <h2>Valor da entrega:</h2>
-            <p>Valor da entrega: <span id="animatedDelivery">€0.00</span></p>
-            
-            <details>
-                <summary>Ver detalhes do cálculo</summary>
-                <div id="deliveryDetails"></div>
-            </details>
-        </div>
-    </div>
+        <button type="button" id="calculateDelivery">Calcular Entrega</button>
+    </form>
 
-    <!-- Script do projeto -->
-    <script src="script.js"></script>
+    <div id="deliveryDetails" style="margin-top: 20px;"></div>
+
+    <!-- Seção opcional de Nota Fiscal -->
+    <div style="margin-top: 30px; border-top:1px solid #ccc; padding-top:20px;">
+    <h2>Gerar Nota Fiscal</h2>
+    <label for="clientNIF">NIF do Cliente (opcional):</label>
+    <input type="text" id="clientNIF" placeholder="Ex: 123456789" maxlength="9" pattern="\d{9}">
+    <button type="button" id="generateInvoice">Gerar Nota Fiscal</button>
+
+    <!-- Aviso informativo -->
+    <p style="font-size: 0.9em; color: red; margin-top: 10px;">
+        ⚠️ Nota: Esta nota fiscal é apenas para fins de teste e não tem validade oficial.
+    </p>
+</div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
