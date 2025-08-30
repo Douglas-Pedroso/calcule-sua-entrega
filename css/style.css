@@ -7,14 +7,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    height: 100dvh;
-    padding-top: 20px;
-    box-sizing: border-box;
+    min-height: 100vh;  /* mantém */
+    padding: 20px 0;    /* espaço acima e abaixo */
     margin: 0;
-    padding: 20px 0; /* novo: garante espaço acima e abaixo */
     box-sizing: border-box;
 }
+
 
 
 /* ------------------------------
@@ -142,5 +140,40 @@ input::placeholder {
 select {
     cursor: pointer;
 }
+/* ------------------------------
+   Responsividade
+------------------------------ */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;   /* ocupa quase toda a tela */
+        padding: 20px;
+    }
+
+    h1, h2 {
+        font-size: 1.3em;
+    }
+
+    input, select, button {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;   /* ainda mais justo em celulares pequenos */
+        padding: 15px;
+    }
+
+    h1, h2 {
+        font-size: 1.1em;
+    }
+
+    input, select, button {
+        font-size: 0.85em;
+        padding: 7px;
+    }
+}
+
 
 
