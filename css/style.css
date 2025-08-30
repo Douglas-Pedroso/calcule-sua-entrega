@@ -6,12 +6,13 @@ body {
     background: #2c2c2c;  /* cinza escuro */
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;  /* mantém */
-    padding: 20px 0;    /* espaço acima e abaixo */
+    align-items: flex-start; /* evita container colado no topo */
+    min-height: calc(var(--vh, 1vh) * 100); /* usa altura real da viewport */
+    padding: 20px 0;
     margin: 0;
     box-sizing: border-box;
 }
+
 
 
 
